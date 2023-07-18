@@ -1,6 +1,11 @@
 .home{
     text-align: center;
 
+    h1{
+        font-size: 3rem;
+        margin-top: 5rem;
+    }
+
     .purchases{
         @include flex(center,center,row);
 
@@ -10,6 +15,14 @@
             // border: 1px solid black;
             border-radius: 1rem;
             background: #2ebccf;
+
+            h2{
+                font-size: 2.3rem;
+                color: #054785;
+            }
+            h3{
+                font-size: 2rem;
+            }
         }
     }
 }

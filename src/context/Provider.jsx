@@ -1,21 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import Context from './Context'
-import { TOTAL_FILES } from '../assets/data'
+import { MONTHS, TOTAL_FILES } from '../assets/data'
 
 const Provider = ({children}) => {
 
 const [purchases, setPurchases]=useState([])
+const [months,setMonths]=useState([])
+const [resumes,setResumes]=useState([])
 
 useEffect(()=>{
   init()
 },[])
 
-// useEffect(()=>{
-//   console.log(purchases)
-// },[purchases])
+useEffect(()=>{
+  setMonths(getMonths(purchases))
+},[purchases])
+
+useEffect(()=>{
+  setResumes([])
+  months.forEach((_,i)=>{
+    const resume = getResume(months[i], purchases)
+    setResumes(currentResumes=>[...currentResumes, resume])
+  })
+},[months])
+
+useEffect(()=>{
+  console.log(resumes)
+},[resumes])
 
 const init = ()=>{
-  // getData()
   getPurchases()
 }
 
@@ -27,7 +40,6 @@ const getPurchases = ()=>{
     const wholePath = path + i + typeFile
       getData(wholePath)
   }
-
 }
 
 const getData = (path)=>{
@@ -44,6 +56,9 @@ const getData = (path)=>{
       const date = timeDate.split(' ')[0]
       const time = timeDate.split(' ')[1]
       // console.log(date, time)
+      const monthNumber = Number(date.split('/')[1])
+      const month = MONTHS[monthNumber-1]
+      // console.log(month)
 
       const dets = [...doc.getElementsByTagName('det')];
       // console.log(dets)
@@ -68,7 +83,7 @@ const getData = (path)=>{
       },0)
       // console.log(totalValue)
 
-      const newPurchase = {products, uniqueProducts, totalValue, date, time}
+      const newPurchase = {products, uniqueProducts, totalValue, date, time, month}
       
       setPurchases(currentPurchases=>[...currentPurchases, newPurchase])
     })
@@ -98,11 +113,43 @@ const getUniqueItems = (items) => {
   return uniqueList;
 };
 
+const getMonths = (purchases)=>{
+  const months = []
+  purchases.forEach((purchase)=>{
+    const existingMonth = months.find((item)=>item === purchase.month)
+    if(!existingMonth){
+      months.push(purchase.month)
+    }
+  })
+  // console.log(months)
+  return months
+}
+
+const getResume = (month, purchases)=>{
+    const bigList = purchases.map(purchase=>{
+      if(purchase.month===month){
+        return purchase.uniqueProducts
+      }
+      else{
+        return ''
+      }
+    })
+    let listOfProducts = []
+    for(let i=0; i<bigList.length; i++){
+      listOfProducts = [...listOfProducts,...bigList[i]]
+    }
+    // console.log(listOfProducts)
+  const resume = getUniqueItems(listOfProducts)
+  // console.log(resume)
+  return resume
+}
+
   return (
     <>
     <Context.Provider
     value={{
-      purchases
+      purchases,
+      resumes
     }}>
         {children}
     </Context.Provider>
