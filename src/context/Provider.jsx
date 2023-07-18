@@ -1,24 +1,37 @@
 import React, { useEffect, useState } from 'react'
 import Context from './Context'
+import { TOTAL_FILES } from '../assets/data'
 
 const Provider = ({children}) => {
 
-const [purchase, setPurchase]=useState({})
+const [purchases, setPurchases]=useState([])
 
 useEffect(()=>{
   init()
 },[])
 
 // useEffect(()=>{
-//   console.log(purchase)
-// },[purchase])
+//   console.log(purchases)
+// },[purchases])
 
 const init = ()=>{
-  getData()
+  // getData()
+  getPurchases()
 }
 
-const getData = ()=>{
-    fetch('recipes/1.html')
+const getPurchases = ()=>{
+  const path = 'recipes/'
+  const typeFile = '.html'
+
+  for(let i=0; i<TOTAL_FILES; i++){
+    const wholePath = path + i + typeFile
+      getData(wholePath)
+  }
+
+}
+
+const getData = (path)=>{
+    fetch(path)
     .then(response => response.text())
     .then(data => {
       // console.log(typeof(data))
@@ -54,8 +67,10 @@ const getData = ()=>{
           return acumulator + value
       },0)
       // console.log(totalValue)
+
+      const newPurchase = {products, uniqueProducts, totalValue, date, time}
       
-      setPurchase({products, uniqueProducts, totalValue, date, time})
+      setPurchases(currentPurchases=>[...currentPurchases, newPurchase])
     })
     .catch(error => {
       console.error('Ocorreu um erro:', error);
@@ -87,7 +102,7 @@ const getUniqueItems = (items) => {
     <>
     <Context.Provider
     value={{
-      purchase
+      purchases
     }}>
         {children}
     </Context.Provider>

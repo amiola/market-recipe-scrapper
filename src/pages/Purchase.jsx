@@ -1,16 +1,29 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Context from '../context/Context'
+import { useParams } from 'react-router-dom'
 
 const Purchase = () => {
 
   const provider = useContext(Context)
+  const {number}=useParams()
+
+  const [purchase,setPurchase]=useState({})
+
+  useEffect(()=>{
+    init() 
+  },[])
+
+
+  const init = ()=>{
+    setPurchase(provider.purchases[number])
+  }
 
   return (
     <>
     <section className="purchase">
-      {provider.purchase.date && <div className="date-time">
-        <h2>Date: {provider.purchase.date}</h2>
-        <h2>Time: {provider.purchase.time}</h2>
+      {purchase && <div className="date-time">
+        <h2>Date: {purchase.date}</h2>
+        <h2>Time: {purchase.time}</h2>
         </div>}
       <table>
         <thead>
@@ -25,7 +38,7 @@ const Purchase = () => {
       </tr>
       </thead>
       <tbody>
-      {provider.purchase.uniqueProducts && provider.purchase.uniqueProducts.map((product,i)=>(
+      {purchase.uniqueProducts && purchase.uniqueProducts.map((product,i)=>(
         <tr key={i}>
           <td>{i+1}</td>
           <td>{product.code}</td>
@@ -38,8 +51,8 @@ const Purchase = () => {
       ))}
       </tbody>
       </table>
-      {provider.purchase.totalValue && <div className="total">
-       <h2>Total Value: R$ {provider.purchase.totalValue.toFixed(2)}</h2>
+      {purchase.totalValue && <div className="total">
+       <h2>Total Value: R$ {purchase.totalValue.toFixed(2)}</h2>
       </div>}
     </section>
     </>
