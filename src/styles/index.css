@@ -48,6 +48,25 @@ a {
 .home .purchases .purchase-link h3 {
   font-size: 2rem;
 }
+.home .resumes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.home .resumes .resume-link {
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 1rem;
+  background: #2ebccf;
+}
+.home .resumes .resume-link h2 {
+  font-size: 2.3rem;
+  color: #054785;
+}
+.home .resumes .resume-link h3 {
+  font-size: 2rem;
+}
 
 .purchase .date-time {
   margin: 2rem 3rem;
@@ -79,4 +98,54 @@ a {
 }
 .purchase .total h2 {
   font-size: 2.5rem;
+}
+.purchase .export-btn {
+  padding: 1rem 2rem;
+  margin: 2rem 3rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.resume .date-time {
+  margin: 2rem 3rem;
+}
+.resume .date-time h2 {
+  font-size: 2rem;
+}
+.resume table {
+  border-collapse: collapse;
+  width: 95%;
+  margin: auto;
+  margin-top: 2rem;
+}
+.resume th, .resume td {
+  border: 1px solid black;
+  padding: 0.5rem;
+  text-align: left;
+  font-size: 2rem;
+}
+.resume th {
+  background-color: #f2f2f2;
+}
+.resume tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+.resume .total {
+  text-align: end;
+  margin: 2rem 4rem;
+}
+.resume .total h2 {
+  font-size: 2.5rem;
+}
+.resume .export-btn {
+  padding: 1rem 2rem;
+  margin: 1rem 3rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
 }/*# sourceMappingURL=index.css.map */

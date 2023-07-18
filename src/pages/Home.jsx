@@ -22,8 +22,8 @@ const Home = () => {
       <h1>Resumes:</h1>
       <div className="resumes">
       {provider.resumes && provider.resumes.map((resume,i)=>(
-        <NavLink to={`/purchase/1`} key={i}><div className='resume-link btn'>
-        <h3>Resume</h3>
+        <NavLink to={`/resume/${i}`} key={i}><div className='resume-link btn'>
+        <h3>Resume {resume.month}</h3>
         </div></NavLink>
       ))}</div>
     </section>

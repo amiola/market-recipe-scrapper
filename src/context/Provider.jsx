@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Context from './Context'
 import { MONTHS, TOTAL_FILES } from '../assets/data'
+import * as XLSX from 'xlsx';
 
 const Provider = ({children}) => {
 
@@ -139,9 +140,25 @@ const getResume = (month, purchases)=>{
       listOfProducts = [...listOfProducts,...bigList[i]]
     }
     // console.log(listOfProducts)
-  const resume = getUniqueItems(listOfProducts)
+  const products = getUniqueItems(listOfProducts)
+
+  const totalValue = products.reduce((acumulator, item)=>{
+    const value = +item.vTotal
+    return acumulator + value
+},0)
+
+  const resume = {products, month, totalValue}
   // console.log(resume)
   return resume
+}
+
+const handleExport = (object)=>{
+    var wb = XLSX.utils.book_new(),
+    ws = XLSX.utils.json_to_sheet(object)
+
+    XLSX.utils.book_append_sheet(wb, ws, "MySheet1");
+
+    XLSX.writeFile(wb, 'MyExcel.xlsx');
 }
 
   return (
@@ -149,7 +166,8 @@ const getResume = (month, purchases)=>{
     <Context.Provider
     value={{
       purchases,
-      resumes
+      resumes,
+      handleExport
     }}>
         {children}
     </Context.Provider>

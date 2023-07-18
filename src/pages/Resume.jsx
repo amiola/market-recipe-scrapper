@@ -2,28 +2,31 @@ import React, { useContext, useEffect, useState } from 'react'
 import Context from '../context/Context'
 import { useParams } from 'react-router-dom'
 
-const Purchase = () => {
+const Resume = () => {
 
   const provider = useContext(Context)
   const {number}=useParams()
 
-  const [purchase,setPurchase]=useState({})
+  const [resume,setResume]=useState({})
 
   useEffect(()=>{
     init() 
   },[])
 
+  useEffect(()=>{
+    console.log(resume)
+  },[resume])
+
 
   const init = ()=>{
-    setPurchase(provider.purchases[number])
+    setResume(provider.resumes[number])
   }
 
   return (
     <>
-    <section className="purchase">
-      {purchase && <div className="date-time">
-        <h2>Date: {purchase.date}</h2>
-        <h2>Time: {purchase.time}</h2>
+    <section className="resume">
+      {resume && <div className="date-time">
+        <h2>Month: {resume.month}</h2>
         </div>}
       <table>
         <thead>
@@ -38,7 +41,7 @@ const Purchase = () => {
       </tr>
       </thead>
       <tbody>
-      {purchase.uniqueProducts && purchase.uniqueProducts.map((product,i)=>(
+      {resume.products && resume.products.map((product,i)=>(
         <tr key={i}>
           <td>{i+1}</td>
           <td>{product.code}</td>
@@ -51,13 +54,13 @@ const Purchase = () => {
       ))}
       </tbody>
       </table>
-      {purchase.totalValue && <div className="total">
-       <h2>Total Value: R$ {purchase.totalValue.toFixed(2)}</h2>
+      {resume.totalValue && <div className="total">
+       <h2>Total Value: R$ {resume.totalValue.toFixed(2)}</h2>
       </div>}
-      <button className='export-btn btn' onClick={()=>provider.handleExport(purchase.products)}>Export Table</button>
+      <button className='export-btn btn' onClick={()=>provider.handleExport(resume.products)}>Export Table</button>
     </section>
     </>
   )
 }
 
-export default Purchase
+export default Resume
