@@ -8,26 +8,38 @@ html {
   font-size: 62.5%;
 }
 
-.home table {
+.home {
+  text-align: center;
+}
+
+.purchase .date-time {
+  margin: 2rem 3rem;
+}
+.purchase .date-time h2 {
+  font-size: 2rem;
+}
+.purchase table {
   border-collapse: collapse;
   width: 95%;
   margin: auto;
   margin-top: 2rem;
 }
-.home th, .home td {
+.purchase th, .purchase td {
   border: 1px solid black;
   padding: 0.5rem;
   text-align: left;
   font-size: 2rem;
 }
-.home th {
+.purchase th {
   background-color: #f2f2f2;
 }
-.home tr:nth-child(even) {
+.purchase tr:nth-child(even) {
   background-color: #f9f9f9;
 }
-.home .total {
+.purchase .total {
   text-align: end;
-  font-size: 2rem;
   margin: 2rem 4rem;
+}
+.purchase .total h2 {
+  font-size: 2.5rem;
 }/*# sourceMappingURL=index.css.map */

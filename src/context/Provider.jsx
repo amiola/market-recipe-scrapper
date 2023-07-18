@@ -3,17 +3,15 @@ import Context from './Context'
 
 const Provider = ({children}) => {
 
-const [products, setProducts]=useState([])
-const [totalValue, setTotalValue]=useState(0)
-const [uniqueProducts, setUniqueProducts]=useState([])
+const [purchase, setPurchase]=useState({})
 
 useEffect(()=>{
   init()
 },[])
 
-useEffect(()=>{
-  getUniqueItems(products)
-},[products])
+// useEffect(()=>{
+//   console.log(purchase)
+// },[purchase])
 
 const init = ()=>{
   getData()
@@ -25,12 +23,19 @@ const getData = ()=>{
     .then(data => {
       // console.log(typeof(data))
       const parser = new DOMParser();
-      const doc = parser.parseFromString(data, 'text/html');
-      console.log(doc)
+      const doc = parser.parseFromString(data, 'text/html')
+      // console.log(doc)
+
+      const timeDate = doc.getElementsByTagName('datahora')[0].textContent;
+      // console.log(timeDate)
+      const date = timeDate.split(' ')[0]
+      const time = timeDate.split(' ')[1]
+      // console.log(date, time)
+
       const dets = [...doc.getElementsByTagName('det')];
       // console.log(dets)
   
-      const products1 = dets.map(item=>{
+      const products = dets.map(item=>{
           const name = item.getElementsByTagName('xprod')[0].textContent;
           const code = item.getElementsByTagName('cean')[0].textContent;
           const unit = item.getElementsByTagName('ucom')[0].textContent;
@@ -40,16 +45,17 @@ const getData = ()=>{
   
           return { name, code, unit, quan, vUnit, vTotal }
       })
-      // console.log(products1);
-      setProducts(products1)
+      // console.log(products);
+
+      const uniqueProducts=getUniqueItems(products)
   
-      const totalValue1 = products1.reduce((acumulator, item)=>{
+      const totalValue = products.reduce((acumulator, item)=>{
           const value = +item.vTotal
           return acumulator + value
       },0)
-      // console.log(totalValue1)
-      setTotalValue(totalValue1.toFixed(2))
-  
+      // console.log(totalValue)
+      
+      setPurchase({products, uniqueProducts, totalValue, date, time})
     })
     .catch(error => {
       console.error('Ocorreu um erro:', error);
@@ -72,16 +78,16 @@ const getUniqueItems = (items) => {
       uniqueList.push(product);
     }
   });
-  console.log(uniqueList);
-  setUniqueProducts(uniqueList);
+  // console.log(uniqueList);
+  // setUniqueProducts(uniqueList);
+  return uniqueList;
 };
 
   return (
     <>
     <Context.Provider
     value={{
-      products,
-      totalValue
+      purchase
     }}>
         {children}
     </Context.Provider>
