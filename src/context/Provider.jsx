@@ -25,9 +25,9 @@ useEffect(()=>{
   })
 },[months])
 
-useEffect(()=>{
-  console.log(resumes)
-},[resumes])
+// useEffect(()=>{
+//   console.log(resumes)
+// },[resumes])
 
 const init = ()=>{
   getPurchases()
@@ -52,12 +52,12 @@ const getData = (path)=>{
       const doc = parser.parseFromString(data, 'text/html')
       // console.log(doc)
 
-      const timeDate = doc.getElementsByTagName('datahora')[0].textContent;
+      const timeDate = doc.getElementsByTagName('dhemi')[0].textContent;
       // console.log(timeDate)
-      const date = timeDate.split(' ')[0]
-      const time = timeDate.split(' ')[1]
+      const date = timeDate.split('T')[0]
+      const time = timeDate.split('T')[1].split('-')[0]
       // console.log(date, time)
-      const monthNumber = Number(date.split('/')[1])
+      const monthNumber = Number(date.split('-')[1])
       const month = MONTHS[monthNumber-1]
       // console.log(month)
 

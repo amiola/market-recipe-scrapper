@@ -1,5 +1,7 @@
 .purchase{
-
+    .text{
+      @include flex(flex-start, space-between,row);
+    }
     .date-time{
       margin: 2rem 3rem;
       h2{
@@ -10,7 +12,8 @@
         border-collapse: collapse;
         width: 95%;
         margin: auto;
-        margin-top: 2rem;
+        // margin-top: 1rem;
+        margin-bottom: 2rem;
       }
       
       th, td {
@@ -21,12 +24,14 @@
       }
       
       th {
-        background-color: #f2f2f2;
+        background-color: $color6;
+        color: $color1;
       }
       
       tr:nth-child(even) {
-        background-color: #f9f9f9;
+        background-color: $color5;
       }
+    
 
       .total{
         text-align: end;

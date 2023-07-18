@@ -1,16 +1,18 @@
 .resume{
-
+  .text{
+    @include flex(flex-start, space-between,row);
+  }
     .date-time{
       margin: 2rem 3rem;
       h2{
-        font-size: 2rem;
+        font-size: 2.3rem;
       }
     }
     table {
         border-collapse: collapse;
         width: 95%;
         margin: auto;
-        margin-top: 2rem;
+        margin-bottom: 2rem;
       }
       
       th, td {
@@ -21,11 +23,12 @@
       }
       
       th {
-        background-color: #f2f2f2;
+        background-color: $color6;
+        color: $color1;
       }
       
       tr:nth-child(even) {
-        background-color: #f9f9f9;
+        background-color: $color5;
       }
 
       .total{
@@ -33,7 +36,7 @@
         margin: 2rem 4rem;
 
         h2{
-          font-size: 2.5rem;
+          font-size: 2.3rem;
         }
       }
 

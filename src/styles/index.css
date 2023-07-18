@@ -16,7 +16,11 @@ a {
 
 .btn {
   cursor: pointer;
-  box-shadow: 0px 7px 7px rgba(0, 0, 0, 0.3), 0px 15px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3), 0px 10px 20px rgba(0, 0, 0, 0.2);
+  color: #f2f2f2;
+  background: #0B2545;
+  border: none;
+  border-radius: 0.5rem;
 }
 .btn:hover {
   transform: scale(1.05);
@@ -38,12 +42,10 @@ a {
 .home .purchases .purchase-link {
   padding: 1rem;
   margin: 1rem;
-  border-radius: 1rem;
-  background: #2ebccf;
 }
 .home .purchases .purchase-link h2 {
   font-size: 2.3rem;
-  color: #054785;
+  color: #C5D5EA;
 }
 .home .purchases .purchase-link h3 {
   font-size: 2rem;
@@ -57,8 +59,6 @@ a {
 .home .resumes .resume-link {
   padding: 1rem;
   margin: 1rem;
-  border-radius: 1rem;
-  background: #2ebccf;
 }
 .home .resumes .resume-link h2 {
   font-size: 2.3rem;
@@ -68,6 +68,12 @@ a {
   font-size: 2rem;
 }
 
+.purchase .text {
+  display: flex;
+  justify-content: flex-start;
+  align-items: space-between;
+  flex-direction: row;
+}
 .purchase .date-time {
   margin: 2rem 3rem;
 }
@@ -78,7 +84,7 @@ a {
   border-collapse: collapse;
   width: 95%;
   margin: auto;
-  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 .purchase th, .purchase td {
   border: 1px solid black;
@@ -87,10 +93,11 @@ a {
   font-size: 2rem;
 }
 .purchase th {
-  background-color: #f2f2f2;
+  background-color: #274690;
+  color: #f2f2f2;
 }
 .purchase tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: #C5D5EA;
 }
 .purchase .total {
   text-align: end;
@@ -109,17 +116,23 @@ a {
   font-weight: 600;
 }
 
+.resume .text {
+  display: flex;
+  justify-content: flex-start;
+  align-items: space-between;
+  flex-direction: row;
+}
 .resume .date-time {
   margin: 2rem 3rem;
 }
 .resume .date-time h2 {
-  font-size: 2rem;
+  font-size: 2.3rem;
 }
 .resume table {
   border-collapse: collapse;
   width: 95%;
   margin: auto;
-  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 .resume th, .resume td {
   border: 1px solid black;
@@ -128,17 +141,18 @@ a {
   font-size: 2rem;
 }
 .resume th {
-  background-color: #f2f2f2;
+  background-color: #274690;
+  color: #f2f2f2;
 }
 .resume tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: #C5D5EA;
 }
 .resume .total {
   text-align: end;
   margin: 2rem 4rem;
 }
 .resume .total h2 {
-  font-size: 2.5rem;
+  font-size: 2.3rem;
 }
 .resume .export-btn {
   padding: 1rem 2rem;

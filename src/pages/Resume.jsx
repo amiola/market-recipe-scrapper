@@ -13,10 +13,9 @@ const Resume = () => {
     init() 
   },[])
 
-  useEffect(()=>{
-    console.log(resume)
-  },[resume])
-
+  // useEffect(()=>{
+  //   console.log(resume)
+  // },[resume])
 
   const init = ()=>{
     setResume(provider.resumes[number])
@@ -25,9 +24,14 @@ const Resume = () => {
   return (
     <>
     <section className="resume">
+      <div className="text">
       {resume && <div className="date-time">
         <h2>Month: {resume.month}</h2>
         </div>}
+        {resume.totalValue && <div className="total">
+       <h2>Total Value: R$ {resume.totalValue.toFixed(2)}</h2>
+      </div>}
+      </div>
       <table>
         <thead>
         <tr>
@@ -54,9 +58,6 @@ const Resume = () => {
       ))}
       </tbody>
       </table>
-      {resume.totalValue && <div className="total">
-       <h2>Total Value: R$ {resume.totalValue.toFixed(2)}</h2>
-      </div>}
       <button className='export-btn btn' onClick={()=>provider.handleExport(resume.products)}>Export Table</button>
     </section>
     </>

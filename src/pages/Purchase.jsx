@@ -21,10 +21,15 @@ const Purchase = () => {
   return (
     <>
     <section className="purchase">
+      <div className="text">
       {purchase && <div className="date-time">
         <h2>Date: {purchase.date}</h2>
         <h2>Time: {purchase.time}</h2>
         </div>}
+        {purchase.totalValue && <div className="total">
+       <h2>Total Value: R$ {purchase.totalValue.toFixed(2)}</h2>
+      </div>}
+      </div>
       <table>
         <thead>
         <tr>
@@ -51,9 +56,6 @@ const Purchase = () => {
       ))}
       </tbody>
       </table>
-      {purchase.totalValue && <div className="total">
-       <h2>Total Value: R$ {purchase.totalValue.toFixed(2)}</h2>
-      </div>}
       <button className='export-btn btn' onClick={()=>provider.handleExport(purchase.products)}>Export Table</button>
     </section>
     </>
