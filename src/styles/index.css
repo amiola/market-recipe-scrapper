@@ -33,21 +33,25 @@ a {
   font-size: 3rem;
   margin-top: 5rem;
 }
-.home .purchases {
+.home .month {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   flex-direction: row;
+  margin: 1rem 2rem;
 }
-.home .purchases .purchase-link {
+.home .month h2 {
+  font-size: 3rem;
+}
+.home .month .purchase-link {
   padding: 1rem;
   margin: 1rem;
 }
-.home .purchases .purchase-link h2 {
+.home .month .purchase-link h2 {
   font-size: 2.3rem;
   color: #C5D5EA;
 }
-.home .purchases .purchase-link h3 {
+.home .month .purchase-link h3 {
   font-size: 2rem;
 }
 .home .resumes {

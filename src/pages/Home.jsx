@@ -19,13 +19,18 @@ const Home = () => {
       ))}</div>
       <h1>Purchases:</h1>
       <div className="purchases">
-      {provider.purchases && provider.purchases.map((purchase,i)=>(
+      {provider.months && provider.months.map((month,i)=>(
+        <div className="month">
+          <h2>{month.month}:</h2>
+          {provider.purchases && provider.purchases.map((purchase,i)=>(
           <NavLink to={`/purchase/${i}`} key={i}><div className='purchase-link btn'>
             <h3>Date: {purchase.date}</h3>
             <h3>Time: {purchase.time}</h3>
             <h2>Total: R$ {purchase.totalValue.toFixed(2)}</h2>
             </div></NavLink>
         ))}
+        </div>
+      ))}
       </div>
     </section>
     </>

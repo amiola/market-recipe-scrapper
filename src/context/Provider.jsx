@@ -8,7 +8,6 @@ const Provider = ({children}) => {
 const [purchases, setPurchases]=useState([])
 const [months,setMonths]=useState([])
 const [resumes,setResumes]=useState([])
-const [purchPerMonth,setPurchPerMonth]=useState([])
 
 useEffect(()=>{
   init()
@@ -19,9 +18,10 @@ useEffect(()=>{
 },[purchases])
 
 useEffect(()=>{
+  // console.log(months)
   setResumes([])
   months.forEach((_,i)=>{
-    const resume = getResume(months[i], purchases)
+    const resume = getResume(months[i])
     setResumes(currentResumes=>[...currentResumes, resume])
   })
 },[months])
@@ -118,23 +118,26 @@ const getUniqueItems = (items) => {
 const getMonths = (purchases)=>{
   const months = []
   purchases.forEach((purchase)=>{
-    const existingMonth = months.find((item)=>item === purchase.month)
+    const existingMonth = months.find((item)=>item.month === purchase.month)
     if(!existingMonth){
-      months.push(purchase.month)
+      months.push({
+        month: purchase.month,
+        purchases: [
+          purchase
+        ]
+      })
+    }else{
+      const index = months.indexOf(existingMonth)
+      months[index].purchases.push(purchase)
     }
   })
   // console.log(months)
   return months
 }
 
-const getResume = (month, purchases)=>{
-    const bigList = purchases.map(purchase=>{
-      if(purchase.month===month){
+const getResume = (month)=>{
+    const bigList = month.purchases.map(purchase=>{
         return purchase.uniqueProducts
-      }
-      else{
-        return ''
-      }
     })
     let listOfProducts = []
     for(let i=0; i<bigList.length; i++){
@@ -148,13 +151,9 @@ const getResume = (month, purchases)=>{
     return acumulator + value
 },0)
 
-  const resume = {products, month, totalValue}
+  const resume = {products, month: month.month, totalValue}
   // console.log(resume)
   return resume
-}
-
-const getPurchPerMonth =()=>{
-  
 }
 
 const handleExport = (object)=>{
@@ -171,6 +170,7 @@ const handleExport = (object)=>{
     <Context.Provider
     value={{
       purchases,
+      months,
       resumes,
       handleExport
     }}>

@@ -6,8 +6,12 @@
         margin-top: 5rem;
     }
 
-    .purchases{
-        @include flex(center,center,row);
+    .month{
+        @include flex(start,center,row);
+        margin: 1rem 2rem;
+        h2{
+            font-size: 3rem;
+        }
 
         .purchase-link{
             padding: 1rem;
