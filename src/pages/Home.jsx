@@ -9,7 +9,15 @@ const Home = () => {
   return (
     <>
     <section className="home">
-    <h1>Purchases:</h1>
+      <h1>Resumes:</h1>
+      <div className="resumes">
+      {provider.resumes && provider.resumes.map((resume,i)=>(
+        <NavLink to={`/resume/${i}`} key={i}><div className='resume-link btn'>
+        <h3>Resume {resume.month}</h3>
+        <h2>Total: R$ {resume.totalValue.toFixed(2)}</h2>
+        </div></NavLink>
+      ))}</div>
+      <h1>Purchases:</h1>
       <div className="purchases">
       {provider.purchases && provider.purchases.map((purchase,i)=>(
           <NavLink to={`/purchase/${i}`} key={i}><div className='purchase-link btn'>
@@ -19,13 +27,6 @@ const Home = () => {
             </div></NavLink>
         ))}
       </div>
-      <h1>Resumes:</h1>
-      <div className="resumes">
-      {provider.resumes && provider.resumes.map((resume,i)=>(
-        <NavLink to={`/resume/${i}`} key={i}><div className='resume-link btn'>
-        <h3>Resume {resume.month}</h3>
-        </div></NavLink>
-      ))}</div>
     </section>
     </>
   )

@@ -1,3 +1,3 @@
-export const TOTAL_FILES = 3
+export const TOTAL_FILES = 5
 
 export const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December']

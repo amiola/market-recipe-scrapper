@@ -8,6 +8,7 @@ const Provider = ({children}) => {
 const [purchases, setPurchases]=useState([])
 const [months,setMonths]=useState([])
 const [resumes,setResumes]=useState([])
+const [purchPerMonth,setPurchPerMonth]=useState([])
 
 useEffect(()=>{
   init()
@@ -150,6 +151,10 @@ const getResume = (month, purchases)=>{
   const resume = {products, month, totalValue}
   // console.log(resume)
   return resume
+}
+
+const getPurchPerMonth =()=>{
+  
 }
 
 const handleExport = (object)=>{
