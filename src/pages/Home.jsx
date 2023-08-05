@@ -22,6 +22,7 @@ const Home = () => {
       {provider.months && provider.months.map((month,i)=>(
         <div className="month">
           <h2>{month.month}:</h2>
+          <div className="links">
           {provider.purchases && provider.purchases.map((purchase,i)=>(
           <NavLink to={`/purchase/${i}`} key={i}><div className='purchase-link btn'>
             <h3>Date: {purchase.date}</h3>
@@ -29,6 +30,7 @@ const Home = () => {
             <h2>Total: R$ {purchase.totalValue.toFixed(2)}</h2>
             </div></NavLink>
         ))}
+        </div>
         </div>
       ))}
       </div>

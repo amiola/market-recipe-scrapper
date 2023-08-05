@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Context from './Context'
-import { MONTHS, TOTAL_FILES } from '../assets/data'
+import { CATEGORIES, MONTHS, TOTAL_FILES } from '../assets/data'
 import * as XLSX from 'xlsx';
 
 const Provider = ({children}) => {
@@ -72,8 +72,19 @@ const getData = (path)=>{
           const quan = +item.getElementsByTagName('qcom')[0].textContent;
           const vUnit = (+item.getElementsByTagName('vuncom')[0].textContent).toFixed(2);
           const vTotal = (+item.getElementsByTagName('vprod')[0].textContent).toFixed(2);
+
+          let category;
+          let subcategory;
+          CATEGORIES.map(cat=>{
+            cat.subcategories.map(sub=>{
+              if(sub.items.includes(name)){
+                category = cat.category;
+                subcategory = sub.subcategory;
+              }
+            })
+          })
   
-          return { name, code, unit, quan, vUnit, vTotal }
+          return { name, code, category, subcategory, unit, quan, vUnit, vTotal }
       })
       // console.log(products);
 

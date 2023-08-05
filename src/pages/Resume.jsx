@@ -38,6 +38,8 @@ const Resume = () => {
           <th>Item</th>
           <th>Code</th>
           <th>Name</th>
+          <th>Category</th>
+          <th>Subcategory</th>
           <th>Unit</th>
           <th>Quantity</th>
           <th>Unit Value</th>
@@ -50,6 +52,8 @@ const Resume = () => {
           <td>{i+1}</td>
           <td>{product.code}</td>
           <td>{product.name}</td>
+          <td>{product.category}</td>
+          <td>{product.subcategory}</td>
           <td>{product.unit}</td>
           <td>{product.quan}</td>
           <td>R$ {product.vUnit}</td>

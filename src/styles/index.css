@@ -40,19 +40,29 @@ a {
   flex-direction: row;
   margin: 1rem 2rem;
 }
+.home .month .links {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
 .home .month h2 {
   font-size: 3rem;
+  margin-right: 1rem;
 }
 .home .month .purchase-link {
-  padding: 1rem;
-  margin: 1rem;
+  width: 16rem;
+  padding: 0.7rem;
+  margin: 0.7rem;
 }
 .home .month .purchase-link h2 {
-  font-size: 2.3rem;
+  font-size: 1.9rem;
   color: #C5D5EA;
 }
 .home .month .purchase-link h3 {
-  font-size: 2rem;
+  font-size: 1.7rem;
 }
 .home .resumes {
   display: flex;
