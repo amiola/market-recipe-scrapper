@@ -303,6 +303,95 @@ export const NUBANK = [
 "31 JUL Pagamento em 31 JUL 200,00"
 ]
 
+export const CREDIT_CATEGORIES = [
+    {
+        category: 'Airbnb',
+        items: [
+            'AIRBNB PAGAM*AIRBNB *'
+        ]
+    },
+    {
+        category: 'Apple',
+        items: [
+            'APPLE COM/BILL'
+        ]
+    },
+    {
+        category: 'Comida',
+        items: [
+            'CASA DOS DOCES',
+            'DELICIAS DA PRAZERES -',
+            'EMPORIO DO GRAO',
+            'MAGIA DOS PAES E MAGIA',
+            'PG *TON ADRIANA PAUL',
+            'PONTEIO GRILL',
+            'SHOPPING RECIFE QUIOSQ',
+            'UHUU *EFB',
+            'ZE BURGUER - SETUBAL'
+        ]
+    },
+    {
+        category: 'Compras',
+        items: [
+            'AMAZON MARKETPLACE',
+            'PAYGO*EMPORIO DO AROMA',
+            'SHOPEE',
+            'SHOPEE*140454864226003',
+            'SHOPEE*EQUIPE MULTIVEN'
+
+        ]
+    },
+    {
+        category: 'Farmácia',
+        items: [
+            'DROGASIL 2384'
+        ]
+    },
+    {
+        category: 'Fotos',
+        items: [
+            'ADOBE',
+            'CITY LAB',
+            'ESCAMBO',
+            'PIXELLU 46,5',
+            'PIXIESET COM 100,0'
+        ]
+    },
+    {
+        category: 'Mercado',
+        items: [
+            'MERCADINHO BELMONTE LT',
+            'RECIBOMSUPERMERCADOS'
+        ]
+    },
+    {
+        category: 'Outros',
+        items: [
+            'QUASE TUDO TEM',
+            'SCP BASICO- JUL/23'
+        ]
+    },
+    {
+        category: 'Roupa',
+        items: [
+            'EBN *SHEIN',
+            'HAVAIANAS RECIFE'
+        ]
+    },
+    {
+        category: 'Tim',
+        items: [
+            'TIM*TIM CONTROLE'
+        ]
+    },
+    {
+        category: 'Uber',
+        items: [
+            'UBER *UBER *TRIP'
+        ]
+    },
+]
+
 export const CATEGORIES = [
     {
         category: 'Carbohidratos',

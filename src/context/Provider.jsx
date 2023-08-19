@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Context from './Context'
-import { CATEGORIES, MON, MONTHS, NUBANK, SANTANDER, TOTAL_FILES } from '../assets/data'
+import { CATEGORIES, CREDIT_CATEGORIES, MON, MONTHS, NUBANK, SANTANDER, TOTAL_FILES } from '../assets/data'
 import * as XLSX from 'xlsx';
 
 const Provider = ({children}) => {
@@ -180,7 +180,15 @@ const getNubankPurch = ()=>{
     } else{
       type = 'Compra'
     }
-  return { date, period, price: +price, description, parcela, type};
+
+    let category;
+          CREDIT_CATEGORIES.map(cat=>{
+              if(cat.items.includes(description)){
+                category = cat.category;
+              }
+          })
+
+  return { date, period, price: +price, description, parcela, type, category};
   })
   // console.log(items)
   return items;
@@ -195,11 +203,13 @@ const getPeriods = (purchases)=>{
         period: purchase.period,
         purchases: [
           purchase
-        ]
+        ],
+        vTotal: purchase.price
       })
     }else{
       const index = periods.indexOf(existingPeriod)
       periods[index].purchases.push(purchase)
+      periods[index].vTotal += purchase.price
     }
   })
   console.log(periods)
@@ -229,7 +239,14 @@ const getSantanderPurch=()=>{
     const parcela = item.slice(5).match(/\d{2}\/\d{2}/)? item.slice(5).match(/\d{2}\/\d{2}/)[0] : '-';
     const description = item.slice(5).match(/\d{2}\/\d{2}/)? item.slice(6, item.length - price.length - 6 - 1) : item.slice(6, item.length - price.length - 1)
 
-    return { date, period, price: +price, description, parcela};
+    let category;
+          CREDIT_CATEGORIES.map(cat=>{
+              if(cat.items.includes(description)){
+                category = cat.category;
+              }
+          })
+
+    return { date, period, price: +price, description, parcela, category};
   })
   // console.log(items)
   return items

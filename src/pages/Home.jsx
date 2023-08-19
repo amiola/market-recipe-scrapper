@@ -9,6 +9,23 @@ const Home = () => {
   return (
     <>
     <section className="home">
+      <h1>Credit card resumes:</h1>
+      <h1>Nubank</h1>
+      <div className="resumes">
+      {provider.nubankPeriods && provider.nubankPeriods.map((resume,i)=>(
+        <NavLink to={`/credit-resume/nubank/${i}`} key={i}><div className='resume-link btn'>
+        <h3>Resume {resume.period}</h3>
+        {/* <h2>Total: R$ {resume.totalValue.toFixed(2)}</h2> */}
+        </div></NavLink>
+      ))}</div>
+      <h1>Santander</h1>
+      <div className="resumes">
+      {provider.santanderPeriods && provider.santanderPeriods.map((resume,i)=>(
+        <NavLink to={`/credit-resume/santander/${i}`} key={i}><div className='resume-link btn'>
+        <h3>Resume {resume.period}</h3>
+        {/* <h2>Total: R$ {resume.totalValue.toFixed(2)}</h2> */}
+        </div></NavLink>
+      ))}</div>
       <h1>Resumes:</h1>
       <div className="resumes">
       {provider.resumes && provider.resumes.map((resume,i)=>(
