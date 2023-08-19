@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import Context from './Context'
-import { CATEGORIES, MON, MONTHS, NUBANK, TOTAL_FILES } from '../assets/data'
+import { CATEGORIES, MON, MONTHS, NUBANK, SANTANDER, TOTAL_FILES } from '../assets/data'
 import * as XLSX from 'xlsx';
 
 const Provider = ({children}) => {
 
+////////////////////////////////////
+// MERCADO //
+
 const [purchases, setPurchases]=useState([])
 const [months,setMonths]=useState([])
 const [resumes,setResumes]=useState([])
-
-const [creditPurch, setCreditPurch]=useState([])
-
-useEffect(()=>{
-  init()
-},[])
 
 useEffect(()=>{
   setMonths(getMonths(purchases))
@@ -27,14 +24,6 @@ useEffect(()=>{
     setResumes(currentResumes=>[...currentResumes, resume])
   })
 },[months])
-
-// useEffect(()=>{
-//   console.log(resumes)
-// },[resumes])
-
-const init = ()=>{
-  getPurchases()
-}
 
 const getPurchases = ()=>{
   const path = 'recipes/'
@@ -169,7 +158,13 @@ const getResume = (month)=>{
   return resume
 }
 
-const getCreditPurch = ()=>{
+////////////////////////////////////
+// NUBANK //
+
+const [nubankPurch, setNubankPurch]=useState([])
+const [nubankPeriods, setNubankPeriods]=useState([])
+
+const getNubankPurch = ()=>{
   const items = NUBANK.map((item)=>{
 
     const day = +item.slice(0,2)
@@ -212,12 +207,50 @@ const getPeriods = (purchases)=>{
 }
 
 useEffect(()=>{
-  setCreditPurch(getCreditPurch())
-},[])
+  setNubankPeriods(getPeriods(nubankPurch))
+},[nubankPurch])
+
+////////////////////////////////////
+// SANTANDER //
+
+const [santanderPurch, setSantanderPurch]=useState([])
+const [santanderPeriods, setSantanderPeriods]=useState([])
+
+const getSantanderPurch=()=>{
+  const items = SANTANDER.map(item1=>{
+
+    const period = +item1.slice(-1)
+
+    const item = item1.slice(0,2)==='1 ' || item1.slice(0,2)==='2 ' ? item1.slice(2,-3) : item1.slice(0,-3)
+    const day = +item.slice(0,2)
+    const month = +item.slice(4,5)
+    const date = new Date(2023, month-1, day)
+    const price = item.match(/\d+,\d+/)[0].replace(',','.')
+    const parcela = item.slice(5).match(/\d{2}\/\d{2}/)? item.slice(5).match(/\d{2}\/\d{2}/)[0] : '-';
+    const description = item.slice(5).match(/\d{2}\/\d{2}/)? item.slice(6, item.length - price.length - 6 - 1) : item.slice(6, item.length - price.length - 1)
+
+    return { date, period, price: +price, description, parcela};
+  })
+  // console.log(items)
+  return items
+}
 
 useEffect(()=>{
-  getPeriods(creditPurch)
-},[creditPurch])
+  setSantanderPeriods(getPeriods(santanderPurch))
+},[santanderPurch])
+
+////////////////////////////////////
+// GENERAL //
+
+const init = ()=>{
+  getPurchases()
+  setNubankPurch(getNubankPurch())
+  setSantanderPurch(getSantanderPurch())
+}
+
+useEffect(()=>{
+  init()
+},[])
 
 const handleExport = (object)=>{
     var wb = XLSX.utils.book_new(),
@@ -235,7 +268,8 @@ const handleExport = (object)=>{
       purchases,
       months,
       resumes,
-      handleExport
+      handleExport,
+      santanderPeriods, nubankPeriods
     }}>
         {children}
     </Context.Provider>
