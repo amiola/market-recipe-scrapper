@@ -2,6 +2,8 @@ export const TOTAL_FILES = 9
 
 export const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December']
 
+export const MON = ['JAN','FEV','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEZ']
+
 export const NUBANK = [
     "02 DEZ Lojao do Shopping - 3/3 56,64",
 "02 DEZ Mercadolivre*Nutriann - 3/3 172,22",

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Context from './Context'
-import { CATEGORIES, MONTHS, TOTAL_FILES } from '../assets/data'
+import { CATEGORIES, MON, MONTHS, NUBANK, TOTAL_FILES } from '../assets/data'
 import * as XLSX from 'xlsx';
 
 const Provider = ({children}) => {
@@ -8,6 +8,8 @@ const Provider = ({children}) => {
 const [purchases, setPurchases]=useState([])
 const [months,setMonths]=useState([])
 const [resumes,setResumes]=useState([])
+
+const [creditPurch, setCreditPurch]=useState([])
 
 useEffect(()=>{
   init()
@@ -166,6 +168,56 @@ const getResume = (month)=>{
   // console.log(resume)
   return resume
 }
+
+const getCreditPurch = ()=>{
+  const items = NUBANK.map((item)=>{
+
+    const day = +item.slice(0,2)
+    const month = MON.indexOf(item.slice(3,6))+1
+    const date = new Date(2023, month-1, day)
+    const period = date.getDate() >= 2? date.getMonth()+1 : date.getMonth()!==0? date.getMonth() : 12
+    const price = item.match(/\d+,\d+/)[0].replace(',','.');
+    const parcela = item.match(/ - .*/)? item.match(/ - .*/)[0].slice(3,6) : '1/1';
+    const description = item.match(/ - .*/)? item.slice(7, item.length - price.length - 6 - 1) : item.slice(7, item.length - price.length - 1);
+    let type;
+    if(description.slice(0,12)==='Pagamento em'){
+      type = 'Pagamento'
+    } else{
+      type = 'Compra'
+    }
+  return { date, period, price: +price, description, parcela, type};
+  })
+  // console.log(items)
+  return items;
+}
+
+const getPeriods = (purchases)=>{
+  const periods = []
+  purchases.forEach((purchase)=>{
+    const existingPeriod = periods.find((item)=>item.period === purchase.period)
+    if(!existingPeriod){
+      periods.push({
+        period: purchase.period,
+        purchases: [
+          purchase
+        ]
+      })
+    }else{
+      const index = periods.indexOf(existingPeriod)
+      periods[index].purchases.push(purchase)
+    }
+  })
+  console.log(periods)
+  return periods
+}
+
+useEffect(()=>{
+  setCreditPurch(getCreditPurch())
+},[])
+
+useEffect(()=>{
+  getPeriods(creditPurch)
+},[creditPurch])
 
 const handleExport = (object)=>{
     var wb = XLSX.utils.book_new(),
