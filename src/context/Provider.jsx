@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Context from './Context'
-import { CATEGORIES, CREDIT_CATEGORIES, MON, MONTHS, NUBANK, SANTANDER, TOTAL_FILES } from '../assets/data'
+import { CATEGORIES, CREDIT_CATEGORIES, MON, MONTHS,TOTAL_FILES } from '../assets/data'
+import { SANTANDER } from '../assets/santander';
+import { NUBANK_B } from '../assets/nubankB';
 import * as XLSX from 'xlsx';
 
 const Provider = ({children}) => {
@@ -165,12 +167,15 @@ const [nubankPurch, setNubankPurch]=useState([])
 const [nubankPeriods, setNubankPeriods]=useState([])
 
 const getNubankPurch = ()=>{
-  const items = NUBANK.map((item)=>{
+  const items = NUBANK_B.map(item1=>{
 
+    const period = +item1.slice(-1)
+
+    const item = item1.slice(0,-2)
     const day = +item.slice(0,2)
     const month = MON.indexOf(item.slice(3,6))+1
     const date = new Date(2023, month-1, day)
-    const period = date.getDate() >= 2? date.getMonth()+1 : date.getMonth()!==0? date.getMonth() : 12
+    // const period = date.getDate() >= 2? date.getMonth()+1 : date.getMonth()!==0? date.getMonth() : 12
     const price = item.match(/\d+,\d+/)[0].replace(',','.');
     const parcela = item.match(/ - .*/)? item.match(/ - .*/)[0].slice(3,6) : '1/1';
     const description = item.match(/ - .*/)? item.slice(7, item.length - price.length - 6 - 1) : item.slice(7, item.length - price.length - 1);
@@ -188,7 +193,7 @@ const getNubankPurch = ()=>{
               }
           })
 
-  return { date, period, price: +price, description, parcela, type, category};
+  return { date, period, price: +price, description, parcela, type, category, bank: 'Nubank'};
   })
   // console.log(items)
   return items;
@@ -246,7 +251,7 @@ const getSantanderPurch=()=>{
               }
           })
 
-    return { date, period, price: +price, description, parcela, category};
+    return { date, period, price: +price, description, parcela, category, bank: 'Santander'};
   })
   // console.log(items)
   return items
@@ -278,6 +283,14 @@ const handleExport = (object)=>{
     XLSX.writeFile(wb, 'MyExcel.xlsx');
 }
 
+function formatDate(date) {
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const year = String(date.getFullYear()).slice(2);
+
+  return `${day}/${month}/${year}`;
+}
+
   return (
     <>
     <Context.Provider
@@ -286,6 +299,8 @@ const handleExport = (object)=>{
       months,
       resumes,
       handleExport,
+      formatDate,
+      nubankPurch, santanderPurch,
       santanderPeriods, nubankPeriods
     }}>
         {children}

@@ -26,16 +26,9 @@ const CreditPurchase = () => {
         setResume(provider.santanderPeriods[number])
         break;
     }
-    
   }
 
-  function formatDate(date) {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-    const year = String(date.getFullYear()).slice(2);
-  
-    return `${day}/${month}/${year}`;
-  }
+ 
 
   return (
     <>
@@ -66,7 +59,7 @@ const CreditPurchase = () => {
         <tr key={i}>
           <td>{i+1}</td>
           <td>{purchase.description}</td>
-          <td>{formatDate(purchase.date)}</td>
+          <td>{provider.formatDate(purchase.date)}</td>
           {/* <td>{product.category}</td> */}
           {/* <td>{product.subcategory}</td> */}
           <td>R$ {purchase.price}</td>
